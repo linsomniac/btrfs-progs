@@ -64,6 +64,9 @@ static struct Command commands[] = {
 	{ do_find_newer, 2, "subvolume find-new", "<path> <last_gen>\n"
 		"List the recently modified files in a filesystem."
 	},
+	{ do_get_latest_gen, 1, "subvolume last-gen", "<path>\n"
+		"Return the latest generation of a filesystem."
+	},
 	{ do_defrag, -1,
 	  "filesystem defragment", "[-vcf] [-s start] [-l len] [-t size] <file>|<dir> [<file>|<dir>...]\n"
 		"Defragment a file or a directory."

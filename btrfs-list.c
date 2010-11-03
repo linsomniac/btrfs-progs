@@ -310,7 +310,7 @@ static int lookup_ino_path(int fd, struct root_info *ri)
  * Then we use the tree search ioctl to scan all the root items for a
  * given root id and spit out the latest generation we can find
  */
-static u64 find_root_gen(int fd)
+u64 find_root_gen(int fd)
 {
 	struct btrfs_ioctl_ino_lookup_args ino_args;
 	int ret;

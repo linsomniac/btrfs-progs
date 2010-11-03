@@ -247,6 +247,35 @@ int do_defrag(int ac, char **av)
 	return errors + 20;
 }
 
+int do_get_latest_gen(int argc, char **argv)
+{
+	int fd;
+	int ret;
+	char *subvol;
+	u64 max_found = 0;
+
+	subvol = argv[1];
+
+	ret = test_issubvolume(subvol);
+	if (ret < 0) {
+		fprintf(stderr, "ERROR: error accessing '%s'\n", subvol);
+		return 12;
+	}
+	if (!ret) {
+		fprintf(stderr, "ERROR: '%s' is not a subvolume\n", subvol);
+		return 13;
+	}
+
+	fd = open_file_or_dir(subvol);
+	if (fd < 0) {
+		fprintf(stderr, "ERROR: can't access '%s'\n", subvol);
+		return 12;
+	}
+	max_found = find_root_gen(fd);
+	printf("transid marker was %llu\n", (unsigned long long)max_found);
+	return 0;
+}
+
 int do_find_newer(int argc, char **argv)
 {
 	int fd;
