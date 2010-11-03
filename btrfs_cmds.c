@@ -272,7 +272,7 @@ int do_get_latest_gen(int argc, char **argv)
 		return 12;
 	}
 	max_found = find_root_gen(fd);
-	printf("transid marker was %llu\n", (unsigned long long)max_found);
+	printf("%llu\n", (unsigned long long)max_found);
 	return 0;
 }
 

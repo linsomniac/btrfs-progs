@@ -15,6 +15,10 @@ btrfs \- control a btrfs filesystem
 .PP
 \fBbtrfs\fP \fBsubvolume set-default\fP\fI <id> <path>\fP
 .PP
+\fBbtrfs\fP \fBsubvolume last-gen\fP\fI <path>\fP
+.PP
+\fBbtrfs\fP \fBsubvolume find-new\fP\fI <path> <last_gen>\fP
+.PP
 \fBbtrfs\fP \fBfilesystem defrag\fP\fI <file>|<dir> [<file>|<dir>...]\fP
 .PP
 \fBbtrfs\fP \fBfilesystem sync\fP\fI <path> \fP
@@ -94,6 +98,21 @@ subvolume (fifth column), and the path (seventh column) relative to the
 \fItop level\fR subvolume.
 These <ID> may be used by the \fBsubvolume set-default\fR command, or at
 mount time via the \fIsubvol=\fR option.
+.TP
+
+\fBsubvolume last-gen\fR\fI <path>\fR
+Return the most current generation id of \fI<path>\fR.  This number is
+suitable for use with the \fBsubvolume find-new\fR command, for example.
+A single number is sent to stdout, representing the most recent generation
+within a subvolume/snapshot.
+
+\fBsubvolume find-new\fR\fI <path> <last_gen>\fR
+Display changes to the subvolume \fI<path>\fR since the generation id
+\fI<last_gen>\fR.  The resulting information includes filenames, offset
+within the file, length, and more.  The last line output displays the most
+recent generation id represented by the output.  For example, one could
+feed this id back in to get an ongoing report of changes to the
+subvolume.
 .TP
 
 \fBsubvolume set-default\fR\fI <id> <path>\fR
